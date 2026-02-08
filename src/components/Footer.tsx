@@ -1,9 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import LogoFull from "@/assets/images/altawfeek-logo-full.png";
+// import LogoFull from "@/assets/images/altawfeek-logo-full.png"; // Removed image
 import { Link } from "wouter";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage(); // Added language
   const year = new Date().getFullYear();
 
   return (
@@ -13,8 +13,19 @@ export default function Footer() {
           
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="inline-block mb-6 bg-white p-3 rounded-xl shadow-sm">
-              <img src={LogoFull} alt="AlTawfeek Engineering" className="h-16 w-auto" />
+            <Link href="/" className="flex flex-col gap-1 mb-6 group">
+              <span className={cn(
+                 "text-2xl font-heading font-bold uppercase tracking-tight leading-none text-foreground group-hover:text-primary transition-colors", 
+                 language === 'en' ? "tracking-wider" : "font-sans"
+              )}>
+                {language === 'en' ? 'AlTawfeek' : 'التوفيق'}
+              </span>
+              <span className={cn(
+                 "text-xs font-body font-bold uppercase tracking-widest text-accent",
+                 language === 'en' ? "" : "font-sans"
+              )}>
+                 {language === 'en' ? 'Engineering & Supply' : 'للهندسة والتوريدات'}
+              </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {t.footer.about_desc}
@@ -58,3 +69,6 @@ export default function Footer() {
     </footer>
   );
 }
+
+// Helper needed for Footer since I used cn but forgot to import it
+import { cn } from "@/lib/utils";

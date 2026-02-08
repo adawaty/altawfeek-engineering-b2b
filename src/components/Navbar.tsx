@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Globe, Phone } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import LogoFull from "@/assets/images/altawfeek-logo-full.png";
+// import LogoFull from "@/assets/images/altawfeek-logo-full.png"; // Removed image
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -44,13 +44,25 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-           <img 
-             src={LogoFull} 
-             alt="AlTawfeek Engineering" 
-             className={cn("h-16 w-auto object-contain transition-all duration-300", scrolled || !isHome ? "drop-shadow-sm" : "drop-shadow-lg")} 
-           />
+        {/* Logo - Text Version */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className={cn(
+            "flex flex-col font-heading font-bold uppercase tracking-tight leading-none",
+            (scrolled || !isHome) ? "text-primary" : "text-white"
+          )}>
+            <span className={cn(
+               "text-xl md:text-2xl transition-all", 
+               language === 'en' ? "tracking-wider" : "font-sans text-xl pt-1"
+            )}>
+              {language === 'en' ? 'AlTawfeek' : 'التوفيق'}
+            </span>
+            <span className={cn(
+               "text-xs md:text-sm font-body normal-case opacity-90",
+               language === 'en' ? "font-medium tracking-widest text-accent" : "font-bold text-accent"
+            )}>
+               {language === 'en' ? 'Engineering & Supply' : 'للهندسة والتوريدات'}
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
